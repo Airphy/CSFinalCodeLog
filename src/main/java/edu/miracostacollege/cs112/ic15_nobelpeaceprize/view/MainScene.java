@@ -23,8 +23,8 @@ public class MainScene extends Scene {
     public static final int WIDTH = 700;
     public static final int HEIGHT = 700;
 
-    private ImageView laureateIV = new ImageView();
-    private ComboBox<String> laureateTypeCB = new ComboBox<>();
+    private ImageView codeLogIV = new ImageView();
+    private ComboBox<String> codeLogTypeCB = new ComboBox<>();
     private TextField nameTF = new TextField();
     private Label nameLabel = new Label("Individual's Name:");
     private Label nameErrLabel = new Label("Name is required.");
@@ -41,13 +41,13 @@ public class MainScene extends Scene {
     private TextField motivationTF = new TextField();
     private Label motivationErrLabel = new Label("Motivation is required :)");
 
-    private ListView<NobelLaureate> laureatesLV = new ListView<>();
+    private ListView<NobelLaureate> codeLogLV = new ListView<>();
 
     private Button removeButton = new Button("- Remove Laureate");
     private Button addButton = new Button("+ Add Laureate");
 
     private Controller controller = Controller.getInstance();
-    private ObservableList<NobelLaureate> laureatesList;
+    private ObservableList<NobelLaureate> codeLogList;
     private NobelLaureate selectedLaureate;
 
     /**
@@ -64,20 +64,20 @@ public class MainScene extends Scene {
         pane.setPadding(new Insets(5));
 
         // TODO: Uncomment after configuring res folder
-        laureateIV.setImage(new Image("nobel_peace_laureates.png"));
-        laureateIV.setFitWidth(WIDTH);
-        pane.add(laureateIV, 0, 0, 3, 1);
+        codeLogIV.setImage(new Image("nobel_peace_laureates.png"));
+        codeLogIV.setFitWidth(WIDTH);
+        pane.add(codeLogIV, 0, 0, 3, 1);
 
         pane.add(new Label("Laureate Type:"), 0, 1);
-        pane.add(laureateTypeCB, 1, 1);
+        pane.add(codeLogTypeCB, 1, 1);
 
         // add items to combo box (dropdown)
-        laureateTypeCB.getItems().addAll("Individual" , "Organization");
+        codeLogTypeCB.getItems().addAll("Individual" , "Organization");
         // Select individual by default
-        laureateTypeCB.getSelectionModel().select(0);
+        codeLogTypeCB.getSelectionModel().select(0);
 
         // Change the text of the name label
-        laureateTypeCB.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> changeNameLabe(newVal));
+        codeLogTypeCB.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> changeNameLabe(newVal));
 
         pane.add(nameLabel, 0, 2);
         pane.add(nameTF, 1, 2);
@@ -114,18 +114,18 @@ public class MainScene extends Scene {
         addButton.setOnAction(e -> addLaureate());
 
         pane.add(addButton, 1, 7);
-        laureatesLV.setPrefWidth(WIDTH);
-        pane.add(laureatesLV, 0, 8, 3, 1);
+        codeLogLV.setPrefWidth(WIDTH);
+        pane.add(codeLogLV, 0, 8, 3, 1);
         pane.add(removeButton, 0, 9);
 
         removeButton.setOnAction(e -> removeLaureate());
 
         // TODO: Uncomment when Controller.java is complete
-        laureatesList = controller.getAllLaureates();
-        laureatesLV.setItems(laureatesList);
+        codeLogList = controller.getAllLaureates();
+        codeLogLV.setItems(codeLogList);
 
         // Wire up an event for the LaureatesLV
-        laureatesLV.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> selectedLaureate(newVal));
+        codeLogLV.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> selectedLaureate(newVal));
 
         removeButton.setDisable(true);
 
@@ -149,9 +149,9 @@ public class MainScene extends Scene {
      */
     private void removeLaureate() {
 // remove the laureate from the observablelist and update the list view
-        laureatesList.remove(selectedLaureate);
-        laureatesLV.refresh();
-        laureatesLV.getSelectionModel().select(-1);
+        codeLogList.remove(selectedLaureate);
+        codeLogLV.refresh();
+        codeLogLV.getSelectionModel().select(-1);
     }
 
     /**
@@ -164,10 +164,10 @@ public class MainScene extends Scene {
             nameErrLabel.setVisible(name.isEmpty()); //repeate for the other fields
         int awardYear = Integer.parseInt(yearTF.getText());
         double prizeAmount = Double.parseDouble(prizeAmountTF.getText());
-    laureatesList.add(new NobelLaureate(name,awardYear, motivation, country, prizeAmount));
+    codeLogList.add(new NobelLaureate(name,awardYear, motivation, country, prizeAmount));
    // laureatesList.add(0, new NobelLaureate(name,awardYear, motivation, country, prizeAmount));
     // now that we have a new laureate, update the list view
-        laureatesLV.refresh();
+        codeLogLV.refresh();
     }
 
     /**
@@ -177,7 +177,7 @@ public class MainScene extends Scene {
      */
     private void updateDisplay()
     {
-        laureatesLV.refresh();
+        codeLogLV.refresh();
     }
 
 }

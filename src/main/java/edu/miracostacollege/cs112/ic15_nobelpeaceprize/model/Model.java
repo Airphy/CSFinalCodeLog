@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Model {
 	
 	public static final String BINARY_FILE = "Laureates.dat";
-	public static final String CSV_FILE = "NobelPeacePrizeWinners.csv";
+	//public static final String CSV_FILE = "NobelPeacePrizeWinners.csv";
 
 	/**
 	 * Determines whether the binary file exists and has data (size/length > 5L bytes).
@@ -39,6 +39,8 @@ public class Model {
 	 * the binary file.be called everytime the application loads,
 	 * @return The list of all laureates populated from the CSV file
 	 */
+
+	/*
 	public static ObservableList<NobelLaureate> populateListFromCSVFile()
 	{
 		// new list capacity 10
@@ -79,7 +81,7 @@ public class Model {
 
 		return allLaureates;
 	}
-
+*/
 	/**
 	 * Populates the list of all laureates from the binary file. This will be called everytime the application loads,
 	 * other than the very first time, since it needs initial data from CSV.
