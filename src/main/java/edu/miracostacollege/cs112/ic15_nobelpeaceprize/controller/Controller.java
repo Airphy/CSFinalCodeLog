@@ -41,8 +41,7 @@ public class Controller {
 				theInstance.mAllLaureatesList = Model.populateListFromBinaryFile();
 
 				// otherwise, fill with the csv file
-			else
-				theInstance.mAllLaureatesList = Model.populateListFromCSVFile();
+
 
 		}
 		// otherwise return the instance
