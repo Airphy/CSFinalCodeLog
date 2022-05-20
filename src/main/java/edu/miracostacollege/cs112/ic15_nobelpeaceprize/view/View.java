@@ -24,7 +24,7 @@ public class View extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		ViewNavigator.setStage(primaryStage);
 		//TODO: Uncomment when res folder has been configured:
-		 primaryStage.getIcons().add(new Image("nobel_peace_prize_icon.png"));
+		 primaryStage.getIcons().add(new Image("codelogphoto1.png"));
 		ViewNavigator.loadScene("Code Log", new MainScene());
 	}
 

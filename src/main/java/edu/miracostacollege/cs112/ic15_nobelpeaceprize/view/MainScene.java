@@ -55,7 +55,7 @@ public class MainScene extends Scene {
         pane.setPadding(new Insets(5));
 
         // TODO: Uncomment after configuring res folder
-        codeLogIV.setImage(new Image("nobel_peace_laureates.png"));
+        codeLogIV.setImage(new Image("codelogphoto1.png"));
         codeLogIV.setFitWidth(WIDTH);
         pane.add(codeLogIV, 0, 0, 3, 1);
 
