@@ -25,7 +25,7 @@ public class View extends Application {
 		ViewNavigator.setStage(primaryStage);
 		//TODO: Uncomment when res folder has been configured:
 		 primaryStage.getIcons().add(new Image("nobel_peace_prize_icon.png"));
-		ViewNavigator.loadScene("Nobel Peace Prize Laureates", new MainScene());
+		ViewNavigator.loadScene("Code Log", new MainScene());
 	}
 
 	/**

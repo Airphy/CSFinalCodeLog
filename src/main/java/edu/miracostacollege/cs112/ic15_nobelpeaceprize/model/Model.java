@@ -87,16 +87,16 @@ public class Model {
 	 * other than the very first time, since it needs initial data from CSV.
 	 * @return The list of all laureates populated from the binary file
 	 */
-	public static ObservableList<NobelLaureate> populateListFromBinaryFile()
+	public static ObservableList<HackerRank> populateListFromBinaryFile()
 	{
 		// New empty list
-		ObservableList<NobelLaureate> allLaureates = FXCollections.observableArrayList();
+		ObservableList<HackerRank> allLaureates = FXCollections.observableArrayList();
 		try {
 			ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(BINARY_FILE));
 			// Read from binary file into an array
-			NobelLaureate[] array = (NobelLaureate[]) fileReader.readObject();
+			HackerRank[] array = (HackerRank[]) fileReader.readObject();
 			//Loop through array and add each laureate to the list
-			for (NobelLaureate nl : array)
+			for (HackerRank nl : array)
 				allLaureates.add(nl);
 			fileReader.close();
 
@@ -113,12 +113,12 @@ public class Model {
 	 * during the stop() method.
 	 * @return True if the data were saved to the binary file successfully, false otherwise.
 	 */
-	public static boolean writeDataToBinaryFile(ObservableList<NobelLaureate> allLaureatesList)
+	public static boolean writeDataToBinaryFile(ObservableList<HackerRank> allLaureatesList)
 	{
 		//opposite order of the read
 
 		// make an array
-		NobelLaureate[] array = new NobelLaureate[allLaureatesList.size()];
+		HackerRank[] array = new HackerRank[allLaureatesList.size()];
 		// right size as of right now, just all nulls
 		// Copy all list data into the array
 		for (int i = 0; i < array.length; i++) {

@@ -1,7 +1,7 @@
 package edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller;
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.Model;
-import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.NobelLaureate;
+import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.HackerRank;
 import javafx.collections.ObservableList;
 
 /**
@@ -16,7 +16,7 @@ public class Controller {
 
 	//1)
 	private static Controller theInstance;
-	private ObservableList<NobelLaureate> mAllLaureatesList;
+	private ObservableList<HackerRank> mLogList;
 
 	//2) no one else can use the class constructor
 	private Controller ()
@@ -38,7 +38,7 @@ public class Controller {
 			theInstance = new Controller();
 
 			if (Model.binaryFileHasData())
-				theInstance.mAllLaureatesList = Model.populateListFromBinaryFile();
+				theInstance.mLogList = Model.populateListFromBinaryFile();
 
 				// otherwise, fill with the csv file
 
@@ -52,8 +52,8 @@ public class Controller {
 	 * Gets the list of all laureates.
 	 * @return The list of all laureates.
 	 */
-	public ObservableList<NobelLaureate> getAllLaureates() {
-		return mAllLaureatesList;
+	public ObservableList<HackerRank> getAllWebsites() {
+		return mLogList;
 	}
 
 	/**
@@ -61,6 +61,6 @@ public class Controller {
 	 * a persistent binary file.
 	 */
 	public void saveData() {
-		Model.writeDataToBinaryFile(mAllLaureatesList);
+		Model.writeDataToBinaryFile(mLogList);
 	}
 }

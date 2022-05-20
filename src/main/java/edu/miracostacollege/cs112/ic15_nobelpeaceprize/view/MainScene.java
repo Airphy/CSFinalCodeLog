@@ -2,7 +2,7 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.view;
 
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller.Controller;
-import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.NobelLaureate;
+import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.HackerRank;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -25,30 +25,21 @@ public class MainScene extends Scene {
 
     private ImageView codeLogIV = new ImageView();
     private ComboBox<String> codeLogTypeCB = new ComboBox<>();
-    private TextField nameTF = new TextField();
-    private Label nameLabel = new Label("Individual's Name:");
-    private Label nameErrLabel = new Label("Name is required.");
+    private TextField exerciseID = new TextField();
+    private Label exerciseIDLabel = new Label("Exercise ID:");
+    private Label exerciseIDErrLabel = new Label("Name is required.");
 
-    private TextField countryTF = new TextField();
-    private Label countryErrLabel = new Label("Country is required.");
+    private TextField dateAttemptedTF = new TextField();
+    private Label dateAttemptedErrLabel = new Label("Date is required.");
 
-    private TextField yearTF = new TextField();
-    private Label yearErrLabel = new Label("Year is required.");
+    private ListView<HackerRank> codeLogLV = new ListView<>();
 
-    private TextField prizeAmountTF = new TextField();
-    private Label prizeAmountErrLabel = new Label("Prize amount is required.");
-
-    private TextField motivationTF = new TextField();
-    private Label motivationErrLabel = new Label("Motivation is required :)");
-
-    private ListView<NobelLaureate> codeLogLV = new ListView<>();
-
-    private Button removeButton = new Button("- Remove Laureate");
-    private Button addButton = new Button("+ Add Laureate");
+    private Button removeButton = new Button("- Remove Log");
+    private Button addButton = new Button("+ Add Log");
 
     private Controller controller = Controller.getInstance();
-    private ObservableList<NobelLaureate> codeLogList;
-    private NobelLaureate selectedLaureate;
+    private ObservableList<HackerRank> codeLogList;
+    private HackerRank selectedWebsite;
 
     /**
      * Constructs a new <code>MainScene</code>, representing the very first scene for the Nobel Peace Price Laureates application.
@@ -68,77 +59,59 @@ public class MainScene extends Scene {
         codeLogIV.setFitWidth(WIDTH);
         pane.add(codeLogIV, 0, 0, 3, 1);
 
-        pane.add(new Label("Laureate Type:"), 0, 1);
+        pane.add(new Label("Website:"), 0, 1);
         pane.add(codeLogTypeCB, 1, 1);
 
         // add items to combo box (dropdown)
-        codeLogTypeCB.getItems().addAll("Individual" , "Organization");
+        codeLogTypeCB.getItems().addAll("Leet Code" , "Hacker Rank", "Website 3", "Website 4");
         // Select individual by default
         codeLogTypeCB.getSelectionModel().select(0);
 
         // Change the text of the name label
-        codeLogTypeCB.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> changeNameLabe(newVal));
+        codeLogTypeCB.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> changeNameLabel(newVal));
 
-        pane.add(nameLabel, 0, 2);
-        pane.add(nameTF, 1, 2);
-        pane.add(nameErrLabel, 2, 2);
-        nameErrLabel.setTextFill(Color.RED);
-        nameErrLabel.setVisible(false);
+        pane.add(exerciseIDLabel, 0, 2);
+        pane.add(exerciseID, 1, 2);
+        pane.add(exerciseIDErrLabel, 2, 2);
+        exerciseIDErrLabel.setTextFill(Color.RED);
+        exerciseIDErrLabel.setVisible(false);
 
-        pane.add(new Label("Award Year:"), 0, 3);
-        pane.add(yearTF, 1, 3);
-        pane.add(yearErrLabel, 2, 3);
-        yearErrLabel.setTextFill(Color.RED);
-        yearErrLabel.setVisible(false);
+        pane.add(new Label("Date Attempted:"), 0, 5);
+        pane.add(dateAttemptedTF, 1, 5);
+        pane.add(dateAttemptedErrLabel, 2, 5);
+        dateAttemptedErrLabel.setTextFill(Color.RED);
+        dateAttemptedErrLabel.setVisible(false);
 
-        pane.add(new Label("Motivation:"), 0, 4);
-        pane.add(motivationTF, 1, 4);
-        pane.add(motivationErrLabel, 2, 4);
-        motivationErrLabel.setTextFill(Color.RED);
-        motivationErrLabel.setVisible(false);
-
-        pane.add(new Label("Country:"), 0, 5);
-        pane.add(countryTF, 1, 5);
-        pane.add(countryErrLabel, 2, 5);
-        countryErrLabel.setTextFill(Color.RED);
-        countryErrLabel.setVisible(false);
-
-
-        pane.add(new Label("Prize Amount $"), 0, 6);
-        pane.add(prizeAmountTF, 1, 6);
-        pane.add(prizeAmountErrLabel, 2, 6);
-        prizeAmountErrLabel.setTextFill(Color.RED);
-        prizeAmountErrLabel.setVisible(false);
 
         //wire up the add button to the addlaureate method
-        addButton.setOnAction(e -> addLaureate());
+        addButton.setOnAction(e -> addWebsite());
 
         pane.add(addButton, 1, 7);
         codeLogLV.setPrefWidth(WIDTH);
         pane.add(codeLogLV, 0, 8, 3, 1);
         pane.add(removeButton, 0, 9);
 
-        removeButton.setOnAction(e -> removeLaureate());
+        removeButton.setOnAction(e -> removeLog());
 
         // TODO: Uncomment when Controller.java is complete
-        codeLogList = controller.getAllLaureates();
+        codeLogList = controller.getAllWebsites();
         codeLogLV.setItems(codeLogList);
 
         // Wire up an event for the LaureatesLV
-        codeLogLV.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> selectedLaureate(newVal));
+        codeLogLV.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> selectedWebsite(newVal));
 
         removeButton.setDisable(true);
 
         this.setRoot(pane);
     }
 
-    private void changeNameLabe(String newVal) {
-        nameLabel.setText(newVal + "'s Name:");
+    private void changeNameLabel(String newVal) {
+        exerciseIDLabel.setText(newVal + "'s Name:");
     }
 
-    private void selectedLaureate(NobelLaureate newVal) {
-        selectedLaureate = newVal;
-        removeButton.setDisable(selectedLaureate == null);
+    private void selectedWebsite(HackerRank newVal) {
+        selectedWebsite = newVal;
+        removeButton.setDisable(selectedWebsite == null);
 
     }
 
@@ -147,9 +120,9 @@ public class MainScene extends Scene {
      * However, if the selected influencer is null, just return (do nothing)
      * Make sure to update the display (list view and combo boxes) after modifying the influencer.
      */
-    private void removeLaureate() {
+    private void removeLog() {
 // remove the laureate from the observablelist and update the list view
-        codeLogList.remove(selectedLaureate);
+        codeLogList.remove(selectedWebsite);
         codeLogLV.refresh();
         codeLogLV.getSelectionModel().select(-1);
     }
@@ -158,13 +131,12 @@ public class MainScene extends Scene {
      * Allows the user to add a new influencer review by navigating to the AddInfluencer scene.
      * Make sure to update the display (list view and combo boxes) after adding the new influencer.
      */
-    private void addLaureate() {
+    private void addWebsite() {
         // Read from all the textfields
-        String name = nameTF.getText(), country = countryTF.getText(), motivation = motivationTF.getText();
-            nameErrLabel.setVisible(name.isEmpty()); //repeate for the other fields
-        int awardYear = Integer.parseInt(yearTF.getText());
-        double prizeAmount = Double.parseDouble(prizeAmountTF.getText());
-    codeLogList.add(new NobelLaureate(name,awardYear, motivation, country, prizeAmount));
+        String idName = exerciseID.getText(), dateAttempted = dateAttemptedTF.getText();
+        exerciseIDErrLabel.setVisible(idName.isEmpty()); //repeate for the other fields
+
+    codeLogList.add(new HackerRank(idName,dateAttempted));
    // laureatesList.add(0, new NobelLaureate(name,awardYear, motivation, country, prizeAmount));
     // now that we have a new laureate, update the list view
         codeLogLV.refresh();
