@@ -21,7 +21,7 @@ public abstract class CodingWebsites implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CodingWebsites that = (CodingWebsites) o;
+        CodingWebsites that = (CodingWebsites ) o;
         return Objects.equals(mExerciseName, that.mExerciseName) && Objects.equals(mDateAttempted, that.mDateAttempted);
     }
 
