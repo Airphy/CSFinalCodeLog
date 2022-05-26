@@ -134,7 +134,7 @@ public class MainScene extends Scene {
 
 //<<<<<<< HEAD
 
-        pane.add(newTotalSceneButton, 1, 9);
+        pane.add(newTotalSceneButton, 0, ++rowIndex);
         newTotalSceneButton.setOnAction(e -> sendToTotalScene());
 
 
