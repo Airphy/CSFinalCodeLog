@@ -1,13 +1,9 @@
 package edu.miracostacollege.cs112.ic15_nobelpeaceprize.model;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.nio.file.FileSystems;
-import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * The <code>Model</code> class represents the business logic (data and calculations) of the application.
