@@ -2,7 +2,6 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.model;
 
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Objects;
 
 

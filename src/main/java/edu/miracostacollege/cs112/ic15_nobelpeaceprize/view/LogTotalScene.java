@@ -3,21 +3,20 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.view;
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller.Controller;
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 /**
  * The <code>MainScene</code> represents the very first scene for the Nobel Peace Prize application.
-
+ * <p>
  * The <code>MainScene</code> also allows for a user to add a new laureate or remove existing entries.
  */
 public class LogTotalScene extends Scene {
+    private TableView table = new TableView();
     public static final int WIDTH = 700;
     public static final int HEIGHT = 700;
 
@@ -31,10 +30,9 @@ public class LogTotalScene extends Scene {
     private Button newMainSceneButton = new Button("Back to Code Log");
 
 
-
     /**
      * Constructs a new <code>MainScene</code>, representing the very first scene for the Nobel Peace Price Laureates application.
-     *
+     * <p>
      * The <code>MainScene</code> also allows for a user to add a new laureate or remove an existing one.
      */
     public LogTotalScene() {
@@ -45,16 +43,29 @@ public class LogTotalScene extends Scene {
         pane.setVgap(5);
         pane.setPadding(new Insets(5));
 
-        // TODO: Uncomment after configuring res folder
+        table.setEditable(false);
 
+        TableColumn firstNameCol = new TableColumn("Website");
+        TableColumn lastNameCol = new TableColumn("Total Codes");
+        TableColumn emailCol = new TableColumn("Completed");
 
-        pane.add(new Label("Total Number of Exercises Completed:"), 4, 4);
-        pane.add(dateAttemptedTF, 1, 4);
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
 
-       // dateAttemptedErrLabel.setTextFill(Color.RED);
-      //  dateAttemptedErrLabel.setVisible(false);
+        ObservableList<CodingWebsites> websites = Controller.getInstance().getAllWebsites();
+        ObservableList<Stat> data = FXCollections.observableArrayList(
+                getStats(websites, "Leet Code"),
+                getStats(websites, "Hacker Rank"),
+                getStats(websites, "Code Wars"),
+                getStats(websites, "Code Chef")
+        );
 
+        System.out.println(data.get(0).mDisplayName + " " + data.get(0).mTotal + " " + data.get(0).mCompleted);
+        // TODO: Table items are not showing up
+        table.setItems(data);
 
+        pane.add(new Label("Total Number of Exercises Completed:"), 1, 0);
+
+        pane.add(table, 1, 1, 3, 5);
 
         pane.add(newMainSceneButton, 1, 9);
         newMainSceneButton.setOnAction(e -> sendToMainScene());
@@ -62,12 +73,32 @@ public class LogTotalScene extends Scene {
         this.setRoot(pane);
     }
 
+    public Stat getStats(ObservableList<CodingWebsites> websites, String displayName) {
+        int total = 0, completed = 0;
+        for (CodingWebsites website : websites) {
+            if (website == null && website.getDisplayName() != displayName) {
+                continue;
+            }
+            total++;
+            if (website.isCompleted())
+                completed++;
+        }
+        return new Stat(displayName, total, completed);
+    }
 
+    public static class Stat {
+        String mDisplayName;
+        int mTotal;
+        int mCompleted;
 
+        public Stat(String displayName, int total, int completed) {
+            mDisplayName = displayName;
+            mTotal = total;
+            mCompleted = completed;
+        }
+    }
 
-
-    private void sendToMainScene()
-    {
+    private void sendToMainScene() {
         ViewNavigator.loadScene("Code Log", new MainScene());
     }
 

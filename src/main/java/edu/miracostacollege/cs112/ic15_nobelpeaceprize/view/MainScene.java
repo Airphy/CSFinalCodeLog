@@ -3,6 +3,7 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.view;
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller.Controller;
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -130,27 +131,25 @@ public class MainScene extends Scene {
         //wire up the add button to the addWebsite method
         addButton.setOnAction(e -> addWebsite());
 
-        codeLogLV.setPrefWidth(WIDTH);
-        codeLogLV.setPrefHeight(200);
-        pane.add(codeLogLV, 0, ++rowIndex, 3, 1);
-
-//<<<<<<< HEAD
-
-        pane.add(newTotalSceneButton, 0, ++rowIndex);
+        pane.add(newTotalSceneButton, 2, rowIndex);
         newTotalSceneButton.setOnAction(e -> sendToTotalScene());
 
-        pane.add(newCreditsSceneButton, 1, rowIndex);
+        pane.add(newCreditsSceneButton, 3, rowIndex);
         newCreditsSceneButton.setOnAction(e -> sendToCreditsScene());
 
+//<<<<<<< HEAD
         pane.add(newInstructionsSceneButton, 2, rowIndex);
         newInstructionsSceneButton.setOnAction(e -> sendToInstructionsScene());
+//=======
+        codeLogLV.setPrefWidth(WIDTH);
+        codeLogLV.setPrefHeight(200);
+        pane.add(codeLogLV, 0, ++rowIndex, 4, 1);
+
+//>>>>>>> 9d70cf2bfe085c882fe61b448b95fbacb0f86f4a
 
 
         removeButton.setOnAction(e -> removeLog());
 
-        // TODO: Uncomment when Controller.java is complete
-//=======
-//>>>>>>> e0e72fa272318798c41292b96aefc7a348ade4f4
         codeLogList = controller.getAllWebsites();
         codeLogLV.setItems(codeLogList);
 
@@ -164,7 +163,7 @@ public class MainScene extends Scene {
 
         webEngine.loadContent(defaultContent);
 
-        pane.add(webView, 0, ++rowIndex, 3, 1);
+        pane.add(webView, 0, ++rowIndex, 4, 1);
         this.setRoot(pane);
     }
 
@@ -179,6 +178,8 @@ public class MainScene extends Scene {
         }
         removeButton.setDisable(false);
         selectedWebsite = newVal;
+
+        submissionTA.setText(selectedWebsite.getSubmission());
 
         // load the URL
         webEngine.loadContent("Loading: " + selectedWebsite.getUrl());
@@ -296,6 +297,7 @@ public class MainScene extends Scene {
      * should refresh to show the new/modified influencer.
      */
     private void updateDisplay() {
+        FXCollections.sort(codeLogList);
         codeLogLV.refresh();
     }
 
