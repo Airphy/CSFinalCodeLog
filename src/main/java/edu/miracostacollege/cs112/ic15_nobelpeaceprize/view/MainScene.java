@@ -36,6 +36,7 @@ public class MainScene extends Scene {
 
     private Button removeButton = new Button("- Remove Log");
     private Button addButton = new Button("+ Add Log");
+    private Button newTotalSceneButton = new Button("See Total");
 
     private Controller controller = Controller.getInstance();
     private ObservableList<CodingWebsites> codeLogList;
@@ -96,6 +97,11 @@ public class MainScene extends Scene {
         pane.add(codeLogLV, 0, 8, 3, 1);
         pane.add(removeButton, 0, 9);
 
+
+        pane.add(newTotalSceneButton, 1, 9);
+        newTotalSceneButton.setOnAction(e -> sendToTotalScene());
+
+
         removeButton.setOnAction(e -> removeLog());
 
         // TODO: Uncomment when Controller.java is complete
@@ -118,6 +124,11 @@ public class MainScene extends Scene {
         selectedWebsite = newVal;
         removeButton.setDisable(selectedWebsite == null);
 
+    }
+
+    private void sendToTotalScene()
+    {
+        ViewNavigator.loadScene("Log Total", new LogTotalScene());
     }
 
     /**
