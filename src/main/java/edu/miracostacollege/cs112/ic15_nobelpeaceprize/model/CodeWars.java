@@ -8,14 +8,20 @@ public class CodeWars extends CodingWebsites implements Serializable {
     //private String mExerciseName;
 
 
-    public CodeWars(String exerciseName, String dateAttempted, boolean completed) {
-        super(exerciseName, dateAttempted, completed);
+    public CodeWars(String exerciseName, String dateAttempted, boolean completed, String url, String submission) {
+        super(exerciseName, dateAttempted, completed, url, submission);
+    }
+
+    @Override
+    public String getDisplayName() {
+        return "Code Wars";
     }
 
     @Override
     public String toString() {
         return "Code Wars [" +
                 "Exercise Name=" + mExerciseName +
+                ", URL=" + mUrl +
                 ", Date Attempted=" + mDateAttempted +
                 ", Completed=" + mCompleted +
                 ']';
