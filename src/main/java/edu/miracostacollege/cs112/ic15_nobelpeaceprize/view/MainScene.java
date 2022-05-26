@@ -234,11 +234,11 @@ public class MainScene extends Scene {
                 submission = submissionTA.getText();
 
         exerciseIDErrLabel.setVisible(idName.isEmpty());
-        dateAttemptedTF.setVisible(dateAttempted.isEmpty());
+        dateAttemptedErrLabel.setVisible(dateAttempted.isEmpty());
         urlErrLabel.setVisible(url.isEmpty() || !isValidURL(url));
 
         boolean completed;
-        exerciseIDErrLabel.setVisible(idName.isEmpty()); //repeate for the other fields
+        exerciseIDErrLabel.setVisible(idName.isEmpty()); //repeat for the other fields
         dateAttemptedErrLabel.setVisible(dateAttempted.isEmpty());
 
         completed = completedCB.isSelected();
