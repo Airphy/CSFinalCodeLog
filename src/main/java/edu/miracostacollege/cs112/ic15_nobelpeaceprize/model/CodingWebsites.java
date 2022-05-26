@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Objects;
 
-public abstract class CodingWebsites implements Serializable {
+public abstract class CodingWebsites implements Serializable, Comparable<CodingWebsites> {
     protected String mExerciseName;
     protected String mDateAttempted;
     protected boolean mCompleted;
@@ -17,6 +17,25 @@ public abstract class CodingWebsites implements Serializable {
     public void setExerciseName(String name) {
         mExerciseName = name;
     }
+
+    @Override
+    public int compareTo(CodingWebsites other) {
+        int companyComp =  this.mExerciseName.compareToIgnoreCase(other.mExerciseName); // Goes through one letter at a time using ASCII , if you care about casing using .compareTo
+        if(companyComp != 0)
+            return companyComp;
+
+        int dateComp =  this.mDateAttempted.compareToIgnoreCase(other.mDateAttempted);
+        if(dateComp != 0)
+            return dateComp;
+
+        //int compComp = Boolean.compare(this.mCompleted, other.mCompleted);
+       // if(compComp != 0)
+         //   return compComp;
+
+        return Boolean.compare(this.mCompleted, other.mCompleted);
+       // return this.mRequirements.compareToIgnoreCase(other.mRequirements);
+    }
+
 
     @Override
     public boolean equals(Object o) {
