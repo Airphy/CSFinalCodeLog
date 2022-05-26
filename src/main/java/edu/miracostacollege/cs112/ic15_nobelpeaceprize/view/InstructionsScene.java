@@ -6,23 +6,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 /**
  * The <code>MainScene</code> represents the very first scene for the Nobel Peace Prize application.
 
  * The <code>MainScene</code> also allows for a user to add a new laureate or remove existing entries.
  */
-public class CreditsScene extends Scene {
-    public static final int WIDTH = 100;
-    public static final int HEIGHT = 125;
+public class InstructionsScene extends Scene {
+    public static final int WIDTH = 720;
+    public static final int HEIGHT = 250;
+
+    private ImageView instructionsIV = new ImageView();
 
 
-
-
-
-    private Button newMainSceneButton = new Button("Back");
 
 
 
@@ -31,7 +30,7 @@ public class CreditsScene extends Scene {
      *
      * The <code>MainScene</code> also allows for a user to add a new laureate or remove an existing one.
      */
-    public CreditsScene() {
+    public InstructionsScene() {
         super(new GridPane(), WIDTH, HEIGHT);
 
         GridPane pane = new GridPane();
@@ -42,19 +41,9 @@ public class CreditsScene extends Scene {
         // TODO: Uncomment after configuring res folder
 
 
-        pane.add(new Label("Developed by: \nAidan Murphy \n         &\nParisa Majidy"), 0, 2);
-
-
-
-
-       // dateAttemptedErrLabel.setTextFill(Color.RED);
-      //  dateAttemptedErrLabel.setVisible(false);
-
-
-
-        pane.add(newMainSceneButton, 0, 0);
-        newMainSceneButton.setOnAction(e -> sendToMainScene());
-        newMainSceneButton.setTextFill(Color.RED);
+        instructionsIV.setImage(new Image("instructions.png"));
+        instructionsIV.setFitWidth(WIDTH);
+        pane.add(instructionsIV, 0, 0, 3, 1);
 
         this.setRoot(pane);
     }
