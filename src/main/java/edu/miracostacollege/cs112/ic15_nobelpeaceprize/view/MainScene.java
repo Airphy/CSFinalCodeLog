@@ -2,7 +2,7 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.view;
 
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller.Controller;
-import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.HackerRank;
+import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -32,14 +32,16 @@ public class MainScene extends Scene {
     private TextField dateAttemptedTF = new TextField();
     private Label dateAttemptedErrLabel = new Label("Date is required.");
 
-    private ListView<HackerRank> codeLogLV = new ListView<>();
+    private ListView<CodingWebsites> codeLogLV = new ListView<>();
 
     private Button removeButton = new Button("- Remove Log");
     private Button addButton = new Button("+ Add Log");
 
     private Controller controller = Controller.getInstance();
-    private ObservableList<HackerRank> codeLogList;
-    private HackerRank selectedWebsite;
+    private ObservableList<CodingWebsites> codeLogList;
+    private CodingWebsites selectedWebsite;
+
+    private CheckBox completedCB = new CheckBox();
 
     /**
      * Constructs a new <code>MainScene</code>, representing the very first scene for the Nobel Peace Price Laureates application.
@@ -63,7 +65,7 @@ public class MainScene extends Scene {
         pane.add(codeLogTypeCB, 1, 1);
 
         // add items to combo box (dropdown)
-        codeLogTypeCB.getItems().addAll("Leet Code" , "Hacker Rank", "Website 3", "Website 4");
+        codeLogTypeCB.getItems().addAll("Leet Code" , "Hacker Rank", "Code Wars", "Code Chef");
         // Select individual by default
         codeLogTypeCB.getSelectionModel().select(0);
 
@@ -76,11 +78,14 @@ public class MainScene extends Scene {
         exerciseIDErrLabel.setTextFill(Color.RED);
         exerciseIDErrLabel.setVisible(false);
 
-        pane.add(new Label("Date Attempted:"), 0, 5);
-        pane.add(dateAttemptedTF, 1, 5);
-        pane.add(dateAttemptedErrLabel, 2, 5);
+        pane.add(new Label("Date Attempted:"), 0, 4);
+        pane.add(dateAttemptedTF, 1, 4);
+        pane.add(dateAttemptedErrLabel, 2, 4);
         dateAttemptedErrLabel.setTextFill(Color.RED);
         dateAttemptedErrLabel.setVisible(false);
+
+        pane.add(new Label("Completed:"), 0, 5);
+        pane.add(completedCB, 1, 5);
 
 
         //wire up the add button to the addlaureate method
@@ -109,7 +114,7 @@ public class MainScene extends Scene {
         exerciseIDLabel.setText(newVal + "'s Name:");
     }
 
-    private void selectedWebsite(HackerRank newVal) {
+    private void selectedWebsite(CodingWebsites newVal) {
         selectedWebsite = newVal;
         removeButton.setDisable(selectedWebsite == null);
 
@@ -134,12 +139,40 @@ public class MainScene extends Scene {
     private void addWebsite() {
         // Read from all the textfields
         String idName = exerciseID.getText(), dateAttempted = dateAttemptedTF.getText();
+        boolean completed;
         exerciseIDErrLabel.setVisible(idName.isEmpty()); //repeate for the other fields
+        dateAttemptedErrLabel.setVisible(dateAttempted.isEmpty());
 
-    codeLogList.add(new HackerRank(idName,dateAttempted));
+        completed = completedCB.isSelected();
+
+
    // laureatesList.add(0, new NobelLaureate(name,awardYear, motivation, country, prizeAmount));
     // now that we have a new laureate, update the list view
-        codeLogLV.refresh();
+
+
+        if (exerciseIDErrLabel.isVisible() || dateAttemptedErrLabel.isVisible())
+            return;
+
+
+        switch(codeLogTypeCB.getSelectionModel().getSelectedIndex())
+        {
+            case 0:
+                codeLogList.add(new HackerRank(idName,dateAttempted, completed));
+                break;
+            case 1:
+                codeLogList.add(new LeetCode(idName,dateAttempted, completed));
+                break;
+            case 2:
+                codeLogList.add(new CodeWars(idName,dateAttempted, completed));
+                break;
+            case 3:
+                codeLogList.add(new CodeChef(idName,dateAttempted, completed));
+                break;
+        }
+
+
+        updateDisplay();
+        clearInputs();
     }
 
     /**
@@ -150,6 +183,15 @@ public class MainScene extends Scene {
     private void updateDisplay()
     {
         codeLogLV.refresh();
+    }
+
+    private void clearInputs() {
+
+
+        codeLogTypeCB.getSelectionModel().select(0);
+        exerciseID.setText("");
+        dateAttemptedTF.setText("");
+        completedCB.setSelected(false);
     }
 
 }

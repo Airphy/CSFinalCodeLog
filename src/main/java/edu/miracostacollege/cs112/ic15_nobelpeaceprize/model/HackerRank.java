@@ -8,7 +8,7 @@ public class HackerRank extends CodingWebsites implements Serializable {
   //private String mExerciseName;
 
 
-  public HackerRank(String name, String date) {
-    super(name, date);
+  public HackerRank(String exerciseName, String dateAttempted, boolean completed) {
+    super(exerciseName, dateAttempted, completed);
   }
 }

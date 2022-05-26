@@ -8,6 +8,7 @@ import java.util.Objects;
 public abstract class CodingWebsites implements Serializable {
     private String mExerciseName;
     private String mDateAttempted;
+    private boolean mCompleted;
 
     public String getExerciseName() {
         return mExerciseName;
@@ -34,10 +35,18 @@ public abstract class CodingWebsites implements Serializable {
         mDateAttempted = date;
     }
 
+    public boolean isCompleted() {
+        return mCompleted;
+    }
 
-    public CodingWebsites(String name, String date) {
-        mExerciseName = name;
-        mDateAttempted = date;
+    public void setCompleted(boolean completed) {
+        mCompleted = completed;
+    }
+
+    public CodingWebsites(String exerciseName, String dateAttempted, boolean completed) {
+        mExerciseName = exerciseName;
+        mDateAttempted = dateAttempted;
+        mCompleted = completed;
     }
 
     @Override
@@ -46,6 +55,7 @@ public abstract class CodingWebsites implements Serializable {
         return "Log [" +
                 "Exercise Name=" + mExerciseName +
                 ", Date Attempted=" + mDateAttempted +
+                ", Completed=" + mCompleted +
                 ']';
     }
 }

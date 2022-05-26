@@ -8,7 +8,7 @@ public class CodeChef extends CodingWebsites implements Serializable {
     //private String mExerciseName;
 
 
-    public CodeChef(String name, String date) {
-        super(name, date);
+    public CodeChef(String exerciseName, String dateAttempted, boolean completed) {
+        super(exerciseName, dateAttempted, completed);
     }
 }

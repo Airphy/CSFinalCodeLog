@@ -8,7 +8,7 @@ public class CodeWars extends CodingWebsites implements Serializable {
     //private String mExerciseName;
 
 
-    public CodeWars(String name, String date) {
-        super(name, date);
+    public CodeWars(String exerciseName, String dateAttempted, boolean completed) {
+        super(exerciseName, dateAttempted, completed);
     }
 }

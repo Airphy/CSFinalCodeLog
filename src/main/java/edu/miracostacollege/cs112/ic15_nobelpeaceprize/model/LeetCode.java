@@ -8,7 +8,7 @@ public class LeetCode extends CodingWebsites implements Serializable {
     //private String mExerciseName;
 
 
-    public LeetCode(String name, String date) {
-        super(name, date);
+    public LeetCode(String exerciseName, String dateAttempted, boolean completed) {
+        super(exerciseName, dateAttempted, completed);
     }
 }

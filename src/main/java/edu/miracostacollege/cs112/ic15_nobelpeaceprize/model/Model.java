@@ -87,24 +87,24 @@ public class Model {
 	 * other than the very first time, since it needs initial data from CSV.
 	 * @return The list of all laureates populated from the binary file
 	 */
-	public static ObservableList<HackerRank> populateListFromBinaryFile()
+	public static ObservableList<CodingWebsites> populateListFromBinaryFile()
 	{
 		// New empty list
-		ObservableList<HackerRank> allLaureates = FXCollections.observableArrayList();
+		ObservableList<CodingWebsites> allLogs = FXCollections.observableArrayList();
 		try {
 			ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(BINARY_FILE));
 			// Read from binary file into an array
-			HackerRank[] array = (HackerRank[]) fileReader.readObject();
+			CodingWebsites[] array = (CodingWebsites[]) fileReader.readObject();
 			//Loop through array and add each laureate to the list
-			for (HackerRank nl : array)
-				allLaureates.add(nl);
+			for (CodingWebsites nl : array)
+				allLogs.add(nl);
 			fileReader.close();
 
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
 
-		return allLaureates;
+		return allLogs;
 	}
 
 	/**
@@ -113,16 +113,16 @@ public class Model {
 	 * during the stop() method.
 	 * @return True if the data were saved to the binary file successfully, false otherwise.
 	 */
-	public static boolean writeDataToBinaryFile(ObservableList<HackerRank> allLaureatesList)
+	public static boolean writeDataToBinaryFile(ObservableList<CodingWebsites> allLogList)
 	{
 		//opposite order of the read
 
 		// make an array
-		HackerRank[] array = new HackerRank[allLaureatesList.size()];
+		CodingWebsites[] array = new CodingWebsites[allLogList.size()];
 		// right size as of right now, just all nulls
 		// Copy all list data into the array
 		for (int i = 0; i < array.length; i++) {
-			array[i] = allLaureatesList.get(i);
+			array[i] = allLogList.get(i);
 		}
 		// Write to the binary file
 		try {

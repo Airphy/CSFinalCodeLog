@@ -1,5 +1,6 @@
 package edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller;
 
+import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.CodingWebsites;
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.Model;
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.HackerRank;
 import javafx.collections.ObservableList;
@@ -16,7 +17,7 @@ public class Controller {
 
 	//1)
 	private static Controller theInstance;
-	private ObservableList<HackerRank> mLogList;
+	private ObservableList<CodingWebsites> mLogList;
 
 	//2) no one else can use the class constructor
 	private Controller ()
@@ -52,7 +53,7 @@ public class Controller {
 	 * Gets the list of all laureates.
 	 * @return The list of all laureates.
 	 */
-	public ObservableList<HackerRank> getAllWebsites() {
+	public ObservableList<CodingWebsites> getAllWebsites() {
 		return mLogList;
 	}
 
