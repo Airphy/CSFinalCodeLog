@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class Model {
 	
-	public static final String BINARY_FILE = "Laureates.dat";
+	public static final String BINARY_FILE = "CodeLogs.dat";
 	//public static final String CSV_FILE = "NobelPeacePrizeWinners.csv";
 
 	/**

@@ -8,14 +8,20 @@ public class CodeChef extends CodingWebsites implements Serializable {
     //private String mExerciseName;
 
 
-    public CodeChef(String exerciseName, String dateAttempted, boolean completed) {
-        super(exerciseName, dateAttempted, completed);
+    public CodeChef(String exerciseName, String dateAttempted, boolean completed, String url, String submission) {
+        super(exerciseName, dateAttempted, completed, url, submission);
+    }
+
+    @Override
+    public String getDisplayName() {
+        return "Code Chef";
     }
 
     @Override
     public String toString() {
         return "Code Chef [" +
                 "Exercise Name=" + mExerciseName +
+                ", URL=" + mUrl +
                 ", Date Attempted=" + mDateAttempted +
                 ", Completed=" + mCompleted +
                 ']';
