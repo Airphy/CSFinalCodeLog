@@ -2,7 +2,6 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller;
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.CodingWebsites;
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.Model;
-import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.HackerRank;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
