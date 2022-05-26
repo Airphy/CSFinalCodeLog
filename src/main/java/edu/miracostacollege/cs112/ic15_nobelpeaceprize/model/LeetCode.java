@@ -11,4 +11,13 @@ public class LeetCode extends CodingWebsites implements Serializable {
     public LeetCode(String exerciseName, String dateAttempted, boolean completed) {
         super(exerciseName, dateAttempted, completed);
     }
+
+    @Override
+    public String toString() {
+        return "Leet Code [" +
+                "Exercise Name=" + mExerciseName +
+                ", Date Attempted=" + mDateAttempted +
+                ", Completed=" + mCompleted +
+                ']';
+    }
 }

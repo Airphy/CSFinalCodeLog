@@ -157,10 +157,10 @@ public class MainScene extends Scene {
         switch(codeLogTypeCB.getSelectionModel().getSelectedIndex())
         {
             case 0:
-                codeLogList.add(new HackerRank(idName,dateAttempted, completed));
+                codeLogList.add(new LeetCode(idName,dateAttempted, completed));
                 break;
             case 1:
-                codeLogList.add(new LeetCode(idName,dateAttempted, completed));
+                codeLogList.add(new HackerRank(idName,dateAttempted, completed));
                 break;
             case 2:
                 codeLogList.add(new CodeWars(idName,dateAttempted, completed));

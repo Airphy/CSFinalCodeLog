@@ -6,9 +6,9 @@ import java.text.NumberFormat;
 import java.util.Objects;
 
 public abstract class CodingWebsites implements Serializable {
-    private String mExerciseName;
-    private String mDateAttempted;
-    private boolean mCompleted;
+    protected String mExerciseName;
+    protected String mDateAttempted;
+    protected boolean mCompleted;
 
     public String getExerciseName() {
         return mExerciseName;
@@ -22,14 +22,11 @@ public abstract class CodingWebsites implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CodingWebsites that = (CodingWebsites ) o;
-        return Objects.equals(mExerciseName, that.mExerciseName) && Objects.equals(mDateAttempted, that.mDateAttempted);
+        CodingWebsites that = (CodingWebsites) o;
+        return mCompleted == that.mCompleted && Objects.equals(mExerciseName, that.mExerciseName) && Objects.equals(mDateAttempted, that.mDateAttempted);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(mExerciseName, mDateAttempted);
-    }
+
 
     public void setDateAttempted(String date) {
         mDateAttempted = date;
@@ -48,7 +45,7 @@ public abstract class CodingWebsites implements Serializable {
         mDateAttempted = dateAttempted;
         mCompleted = completed;
     }
-
+/*
     @Override
     public String toString() {
         NumberFormat currency = NumberFormat.getCurrencyInstance();
@@ -58,5 +55,7 @@ public abstract class CodingWebsites implements Serializable {
                 ", Completed=" + mCompleted +
                 ']';
     }
+    */
+
 }
 

@@ -5,10 +5,19 @@ import java.text.NumberFormat;
 import java.util.Objects;
 
 public class HackerRank extends CodingWebsites implements Serializable {
-  //private String mExerciseName;
+  private String mDifficulty;
 
 
   public HackerRank(String exerciseName, String dateAttempted, boolean completed) {
     super(exerciseName, dateAttempted, completed);
+  }
+
+  @Override
+  public String toString() {
+    return "Hacker Rank [" +
+            "Exercise Name=" + mExerciseName +
+            ", Date Attempted=" + mDateAttempted +
+            ", Completed=" + mCompleted +
+            ']';
   }
 }
