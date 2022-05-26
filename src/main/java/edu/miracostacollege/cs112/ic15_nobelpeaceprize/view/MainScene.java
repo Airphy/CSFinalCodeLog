@@ -133,15 +133,13 @@ public class MainScene extends Scene {
         pane.add(newTotalSceneButton, 2, rowIndex);
         newTotalSceneButton.setOnAction(e -> sendToTotalScene());
 
+        pane.add(newCreditsSceneButton, 3, rowIndex);
+        newCreditsSceneButton.setOnAction(e -> sendToCreditsScene());
+
         codeLogLV.setPrefWidth(WIDTH);
         codeLogLV.setPrefHeight(200);
-        pane.add(codeLogLV, 0, ++rowIndex, 3, 1);
+        pane.add(codeLogLV, 0, ++rowIndex, 4, 1);
 
-        pane.add(newTotalSceneButton, 0, ++rowIndex);
-        newTotalSceneButton.setOnAction(e -> sendToTotalScene());
-
-        pane.add(newCreditsSceneButton, 1, rowIndex);
-        newCreditsSceneButton.setOnAction(e -> sendToCreditsScene());
 
 
         removeButton.setOnAction(e -> removeLog());
@@ -159,7 +157,7 @@ public class MainScene extends Scene {
 
         webEngine.loadContent(defaultContent);
 
-        pane.add(webView, 0, ++rowIndex, 3, 1);
+        pane.add(webView, 0, ++rowIndex, 4, 1);
         this.setRoot(pane);
     }
 
@@ -174,6 +172,8 @@ public class MainScene extends Scene {
         }
         removeButton.setDisable(false);
         selectedWebsite = newVal;
+
+        submissionTA.setText(selectedWebsite.getSubmission());
 
         // load the URL
         webEngine.loadContent("Loading: " + selectedWebsite.getUrl());
