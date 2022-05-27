@@ -237,6 +237,10 @@ public class MainScene extends Scene {
         codeLogList.remove(selectedWebsite);
         codeLogLV.refresh();
         codeLogLV.getSelectionModel().select(-1);
+
+        
+        webEngine.load(null);
+
     }
 
     /**
