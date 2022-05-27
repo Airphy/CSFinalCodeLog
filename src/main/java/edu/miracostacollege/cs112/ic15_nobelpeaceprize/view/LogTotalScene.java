@@ -3,11 +3,14 @@ package edu.miracostacollege.cs112.ic15_nobelpeaceprize.view;
 
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.controller.Controller;
 import edu.miracostacollege.cs112.ic15_nobelpeaceprize.model.*;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -16,7 +19,7 @@ import javafx.scene.layout.GridPane;
  * The <code>MainScene</code> also allows for a user to add a new laureate or remove existing entries.
  */
 public class LogTotalScene extends Scene {
-    private TableView table = new TableView();
+    private TableView<Stat> table = new TableView<Stat>();
     public static final int WIDTH = 700;
     public static final int HEIGHT = 700;
 
@@ -45,11 +48,14 @@ public class LogTotalScene extends Scene {
 
         table.setEditable(false);
 
-        TableColumn firstNameCol = new TableColumn("Website");
-        TableColumn lastNameCol = new TableColumn("Total Codes");
-        TableColumn emailCol = new TableColumn("Completed");
+        TableColumn<Stat, String> displayNameCol = new TableColumn<>("Website");
+        displayNameCol.setCellValueFactory(new PropertyValueFactory<Stat, String>("displayName"));
+        TableColumn<Stat, Integer> totalCodesCol = new TableColumn<>("Total Codes");
+        totalCodesCol.setCellValueFactory(new PropertyValueFactory<Stat, Integer>("total"));
+        TableColumn<Stat, Integer> completedCol = new TableColumn<>("Completed");
+        completedCol.setCellValueFactory(new PropertyValueFactory<Stat, Integer>("completed"));
 
-        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        table.getColumns().addAll(displayNameCol, totalCodesCol, completedCol);
 
         ObservableList<CodingWebsites> websites = Controller.getInstance().getAllWebsites();
         ObservableList<Stat> data = FXCollections.observableArrayList(
@@ -59,8 +65,6 @@ public class LogTotalScene extends Scene {
                 getStats(websites, "Code Chef")
         );
 
-        System.out.println(data.get(0).mDisplayName + " " + data.get(0).mTotal + " " + data.get(0).mCompleted);
-        // TODO: Table items are not showing up
         table.setItems(data);
 
         pane.add(new Label("Total Number of Exercises Completed:"), 1, 0);
@@ -74,9 +78,9 @@ public class LogTotalScene extends Scene {
     }
 
     public Stat getStats(ObservableList<CodingWebsites> websites, String displayName) {
-        int total = 0, completed = 0;
+        Integer total = 0, completed = 0;
         for (CodingWebsites website : websites) {
-            if (website == null && website.getDisplayName() != displayName) {
+            if (website == null || website.getDisplayName() != displayName) {
                 continue;
             }
             total++;
@@ -87,15 +91,40 @@ public class LogTotalScene extends Scene {
     }
 
     public static class Stat {
-        String mDisplayName;
-        int mTotal;
-        int mCompleted;
+        private String displayName;
+        private int total;
+        private int completed;
 
         public Stat(String displayName, int total, int completed) {
-            mDisplayName = displayName;
-            mTotal = total;
-            mCompleted = completed;
+            this.displayName = displayName;
+            this.total = total;
+            this.completed = completed;
         }
+
+        public String getDisplayName() {
+            return displayName;
+        }
+
+        public void setDisplayName(String displayName) {
+            this.displayName = displayName;
+        }
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
+        public int getCompleted() {
+            return completed;
+        }
+
+        public void setCompleted(int completed) {
+            this.completed = completed;
+        }
+
     }
 
     private void sendToMainScene() {
