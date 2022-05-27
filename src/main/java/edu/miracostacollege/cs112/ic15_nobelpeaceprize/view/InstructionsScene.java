@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 /**
  * The <code>MainScene</code> represents the very first scene for the Nobel Peace Prize application.
@@ -23,7 +24,7 @@ public class InstructionsScene extends Scene {
 
 
 
-
+    private Button newMainSceneButton = new Button("Back");
 
     /**
      * Constructs a new <code>MainScene</code>, representing the very first scene for the Nobel Peace Price Laureates application.
@@ -44,6 +45,10 @@ public class InstructionsScene extends Scene {
         instructionsIV.setImage(new Image("instructions.png"));
         instructionsIV.setFitWidth(WIDTH);
         pane.add(instructionsIV, 0, 0, 3, 1);
+
+        pane.add(newMainSceneButton, 0, 4);
+        newMainSceneButton.setOnAction(e -> sendToMainScene());
+        newMainSceneButton.setTextFill(Color.RED);
 
         this.setRoot(pane);
     }

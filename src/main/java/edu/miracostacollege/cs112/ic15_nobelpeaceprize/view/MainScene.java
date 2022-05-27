@@ -138,7 +138,7 @@ public class MainScene extends Scene {
         newCreditsSceneButton.setOnAction(e -> sendToCreditsScene());
 
 //<<<<<<< HEAD
-        pane.add(newInstructionsSceneButton, 2, rowIndex);
+        pane.add(newInstructionsSceneButton, 4, rowIndex);
         newInstructionsSceneButton.setOnAction(e -> sendToInstructionsScene());
 //=======
         codeLogLV.setPrefWidth(WIDTH);
