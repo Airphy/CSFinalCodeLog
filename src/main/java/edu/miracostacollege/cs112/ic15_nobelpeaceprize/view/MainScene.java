@@ -112,16 +112,17 @@ public class MainScene extends Scene {
         dateAttemptedErrLabel.setVisible(false);
 
         pane.add(urlLabel, 0, ++rowIndex);
-        pane.add(urlTF, 1, rowIndex);
-        pane.add(urlErrLabel, 2, rowIndex);
+        pane.add(urlTF, 1, rowIndex,3,1);
+        pane.add(urlErrLabel, 4, rowIndex);
         urlErrLabel.setTextFill(Color.RED);
         urlErrLabel.setVisible(false);
 
-        pane.add(new Label("Completed:"), 0, ++rowIndex);
-        pane.add(completedCB, 1, rowIndex);
-
         pane.add(submissionLabel, 0, ++rowIndex);
         pane.add(submissionTA, 1, rowIndex, 3, 1);
+
+		pane.add(new Label("Completed:"), 0, ++rowIndex);
+		pane.add(completedCB, 1, rowIndex);
+
 
         pane.add(removeButton, 0, ++rowIndex);
         removeButton.setOnAction(e -> removeLog());
@@ -142,8 +143,8 @@ public class MainScene extends Scene {
         newInstructionsSceneButton.setOnAction(e -> sendToInstructionsScene());
 //=======
         codeLogLV.setPrefWidth(WIDTH);
-        codeLogLV.setPrefHeight(200);
-        pane.add(codeLogLV, 0, ++rowIndex, 4, 1);
+        codeLogLV.setPrefHeight(350);
+        pane.add(codeLogLV, 0, ++rowIndex, 5, 1);
 
 //>>>>>>> 9d70cf2bfe085c882fe61b448b95fbacb0f86f4a
 
@@ -163,7 +164,7 @@ public class MainScene extends Scene {
 
         webEngine.loadContent(defaultContent);
 
-        pane.add(webView, 0, ++rowIndex, 4, 1);
+        pane.add(webView, 0, ++rowIndex, 5, 1);
         this.setRoot(pane);
     }
 
@@ -238,7 +239,7 @@ public class MainScene extends Scene {
         codeLogLV.refresh();
         codeLogLV.getSelectionModel().select(-1);
 
-        
+
         webEngine.load(null);
 
     }
